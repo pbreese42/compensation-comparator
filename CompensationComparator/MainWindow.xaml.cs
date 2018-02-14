@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompensationCalculator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace CompensationComparator
         public MainWindow()
         {
             InitializeComponent();
+            URLScraper test = new URLScraper();
+            var col = test.LoadCOLTable("Kennesaw-GA", "San-Jose-CA");
         }
     }
 }
