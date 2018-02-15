@@ -26,6 +26,7 @@ namespace CompensationComparator
             InitializeComponent();
             URLScraper test = new URLScraper();
             var col = test.LoadCOLTable("Kennesaw-GA", "San-Jose-CA");
+            listBox.ItemsSource = col.MultiplierDict;
         }
     }
 }

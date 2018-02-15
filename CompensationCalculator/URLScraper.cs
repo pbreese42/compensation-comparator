@@ -12,7 +12,7 @@ namespace CompensationCalculator
         string url = "http://www.bestplaces.net/cost-of-living/{0}/{1}/50000";
         string xPath = "//*[@id=\"mainContent_dgCOL\"]";
 
-        public COL LoadCOLTable(string currentCity, string destinationCity )
+        public CostOfLiving LoadCOLTable(string currentCity, string destinationCity )
         {
             // Load from Url
             url = string.Format(url, currentCity, destinationCity);
@@ -27,9 +27,9 @@ namespace CompensationCalculator
             // Transform to only get inner text from the nodes
             var values = query.Select(x => x.ToList().Select(y => y.InnerText)).ToList();
 
-            COL col = new COL();
+            CostOfLiving col = new CostOfLiving();
             // Set all properties from values in table
-            foreach (var item in typeof(COL).GetProperties())
+            foreach (var item in typeof(CostOfLiving).GetProperties())
             {
                 var itemVals = values.Where(x => x.ToArray()[0].Equals(item.Name));
                 if (itemVals.Count() > 0)
@@ -38,11 +38,12 @@ namespace CompensationCalculator
                 }
             }
 
+            col.FillCOL();
             return col;
         }
 
     }
-    public class COL
+    public class CostOfLiving
     {
         public List<string> Overall { get; protected set; }
         public List<string> Food { get; protected set; }
@@ -59,6 +60,25 @@ namespace CompensationCalculator
         public double TransportationMultiplier => ComparisonMultiplier(Transportation);
         public double HealthMultiplier => ComparisonMultiplier(Health);
         public double MiscellaneousMultiplier => ComparisonMultiplier(Miscellaneous);
+
+        public Dictionary<string, double> MultiplierDict;
+        public CostOfLiving()
+        {
+        }
+
+        public void FillCOL()
+        {
+            MultiplierDict = new Dictionary<string, double>()
+            {
+                { Overall[0], OverallMultiplier },
+                { Food[0], FoodMultiplier },
+                { Housing[0], HousingMultiplier },
+                { Utilities[0], UtilitiesMultiplier },
+                { Transportation[0], TransportationMultiplier },
+                { Health[0], HealthMultiplier },
+                { Miscellaneous[0], MiscellaneousMultiplier }
+            };
+        }
 
         private double ComparisonMultiplier(List<string> values)
         {
