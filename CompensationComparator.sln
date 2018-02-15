@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompensationComparator", "CompensationComparator\CompensationComparator.csproj", "{965F72C1-E818-41AB-B003-7108870AE58C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompensationCalculator", "CompensationCalculator\CompensationCalculator.csproj", "{3D9B24EE-5DA3-4381-B1CC-55E0A6FF97EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{965F72C1-E818-41AB-B003-7108870AE58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{965F72C1-E818-41AB-B003-7108870AE58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{965F72C1-E818-41AB-B003-7108870AE58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D9B24EE-5DA3-4381-B1CC-55E0A6FF97EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9B24EE-5DA3-4381-B1CC-55E0A6FF97EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9B24EE-5DA3-4381-B1CC-55E0A6FF97EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9B24EE-5DA3-4381-B1CC-55E0A6FF97EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

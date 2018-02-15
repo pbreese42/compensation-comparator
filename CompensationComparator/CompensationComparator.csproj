@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompensationCalculator\CompensationCalculator.csproj">
+      <Project>{3d9b24ee-5da3-4381-b1cc-55e0a6ff97ea}</Project>
+      <Name>CompensationCalculator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
