@@ -1,6 +1,8 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using CompensationComparator.Models;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,15 +21,21 @@ namespace CompensationComparator
             new PaletteHelper().SetLightDark(isDark);
         }
 
-        public IEnumerable<CompensationPiece> TotalCompensation { get; set; }
+        public ObservableCollection<Job> Jobs { get; set; }
 
         public MainWindowViewModel()
         {
-            TotalCompensation = new List<CompensationPiece>
+            Jobs = new ObservableCollection<Job>()
             {
-                new Salary() { BaseSalary = 100000, Bonus=10000 },
-                new Benefits(),
-                new Expenses()
+                new Job()
+                {
+                    Name = "Job1",
+                    TotalCompensation = new ObservableCollection<Compensation>() {
+                        new Salary() { BaseSalary = 10000, Bonus = 10000 },
+                        new Expenses(),
+                        new Benefits()
+                    }
+                }
             };
         }
     }
@@ -39,50 +47,4 @@ namespace CompensationComparator
 
     }
 
-    public class CompensationPiece
-    {
-        public virtual string Name { get; }
-        public virtual Dictionary<string, double> Pieces { get; set; }
-
-        public CompensationPiece()
-        { }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
-    }
-
-    class Salary : CompensationPiece
-    {
-        [DisplayName("Base Salary")]
-        public double BaseSalary { get; set; }
-        public double Bonus { get; set; }
-
-        public override string Name => "Salary";
-
-        public Salary()
-        {
-            Pieces = new Dictionary<string, double>()
-            {
-                { "Base Salary", BaseSalary },
-                { "Bonus", Bonus }
-            };
-        }
-    }
-
-    class Expenses : CompensationPiece
-    {
-        public double Parking { get; set; }
-        public double Gas { get; set; }
-        public override string Name => "Expenses";
-    }
-
-    class Benefits : CompensationPiece
-    {
-        public double HealthInsurance { get; set; }
-        public double DentalInsurance { get; set; }
-        public override string Name => "Benefits";
-    }
 }

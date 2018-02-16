@@ -19,9 +19,7 @@
         <materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel MinWidth="212">
                 <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
-                              DockPanel.Dock="Top"
-                              HorizontalAlignment="Right"
-                              Margin="16"
+                              DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="16"
                               IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked}" />
                 <ListBox>
                     <StackPanel Orientation="Horizontal" Margin="8">
@@ -52,32 +50,38 @@
             </materialDesign:ColorZone>
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="8" Header="Job #1"
-                              materialDesign:ColorZoneAssist.Mode="PrimaryLight">
-                        <GroupBox.HeaderTemplate>
+                    <ItemsControl ItemsSource="{Binding Jobs}">
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Margin="8,0,0,0" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}"/>
+                                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="8" Header="Job #1"
+                              materialDesign:ColorZoneAssist.Mode="PrimaryLight">
+                                    <GroupBox.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Margin="8,0,0,0" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}"/>
+                                        </DataTemplate>
+                                    </GroupBox.HeaderTemplate>
+                                    <ItemsControl ItemsSource="{Binding TotalCompensation}" >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <materialDesign:Card Margin="0,8,0,8">
+                                                    <StackPanel>
+                                                        <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="{Binding Name}" Margin="8" />
+                                                        <ItemsControl ItemsSource="{Binding Pieces.Keys}">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBox materialDesign:HintAssist.Hint="{Binding }" Margin="8" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </StackPanel>
+                                                </materialDesign:Card>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </GroupBox>
                             </DataTemplate>
-                        </GroupBox.HeaderTemplate>
-                        <ItemsControl ItemsSource="{Binding TotalCompensation}" >
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <materialDesign:Card Margin="0,8,0,8">
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="{Binding Name}" Margin="8" />
-                                            <ItemsControl ItemsSource="{Binding Pieces.Keys}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBox materialDesign:HintAssist.Hint="{Binding}" Margin="8" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </StackPanel>
-                                    </materialDesign:Card>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </GroupBox>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                     <ListBox x:Name="listBox" />
                 </StackPanel>
             </ScrollViewer>
